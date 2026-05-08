@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 export function LoginForm() {
@@ -14,10 +15,10 @@ export function LoginForm() {
   return (
     <div className="mx-auto w-full max-w-md rounded-2xl border border-zinc-200 bg-zinc-50/50 p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-950/40">
       <h1 className="text-center text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
-        Logowanie
+        Sign in
       </h1>
       <p className="mt-2 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        Zaloguj się, aby kontynuować
+        Sign in to continue
       </p>
 
       <form className="mt-8 space-y-5" onSubmit={handleSubmit} noValidate>
@@ -26,7 +27,7 @@ export function LoginForm() {
             htmlFor="login-email"
             className="block text-sm font-medium text-zinc-800 dark:text-zinc-200"
           >
-            E-mail
+            Email
           </label>
           <input
             id="login-email"
@@ -36,7 +37,7 @@ export function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full rounded-lg border border-zinc-300 bg-background px-3 py-2 text-sm text-zinc-950 outline-none ring-zinc-950/10 transition-[box-shadow,border-color] placeholder:text-zinc-400 focus:border-zinc-500 focus:ring-2 dark:border-zinc-700 dark:text-zinc-50 dark:ring-zinc-50/10 dark:focus:border-zinc-500"
-            placeholder="twoj@email.pl"
+            placeholder="you@example.com"
           />
         </div>
         <div className="space-y-2">
@@ -45,14 +46,14 @@ export function LoginForm() {
               htmlFor="login-password"
               className="block text-sm font-medium text-zinc-800 dark:text-zinc-200"
             >
-              Hasło
+              Password
             </label>
             <button
               type="button"
               className="text-sm font-medium text-zinc-700 underline-offset-4 hover:text-zinc-950 hover:underline dark:text-zinc-300 dark:hover:text-zinc-50"
-              onClick={() => console.log("Odzyskiwanie hasła ")}
+              onClick={() => console.log("Password recovery")}
             >
-              Odzyskaj hasło
+              Forgot password?
             </button>
           </div>
           <input
@@ -71,7 +72,7 @@ export function LoginForm() {
           type="submit"
           className="flex h-11 w-full items-center justify-center rounded-full bg-zinc-950 text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
         >
-          Zaloguj się
+          Sign in
         </button>
       </form>
 
@@ -84,7 +85,7 @@ export function LoginForm() {
         </div>
         <div className="relative flex justify-center text-xs uppercase tracking-wide">
           <span className="bg-zinc-50/50 px-3 text-zinc-500 dark:bg-zinc-950/40 dark:text-zinc-500">
-            lub
+            or
           </span>
         </div>
       </div>
@@ -92,21 +93,20 @@ export function LoginForm() {
       <button
         type="button"
         className="flex h-11 w-full items-center justify-center gap-2 rounded-full border border-zinc-300 bg-background text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-50 dark:hover:bg-zinc-900"
-        onClick={() => console.log("wybrano google login")}
+        onClick={() => console.log("Google login selected")}
       >
         <GoogleGlyph className="h-5 w-5" />
-        Kontynuuj z Google
+        Continue with Google
       </button>
 
       <p className="mt-8 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        Nie masz konta?{" "}
-        <button
-          type="button"
+        Don&apos;t have an account?{" "}
+        <Link
+          href="/register"
           className="font-medium text-zinc-950 underline-offset-4 hover:underline dark:text-zinc-50"
-          onClick={() => console.log("wybrano rejestracje")}
         >
-          Zarejestruj się
-        </button>
+          Create an account
+        </Link>
       </p>
     </div>
   );

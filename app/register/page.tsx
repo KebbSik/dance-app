@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { LoginForm } from "@/components/LoginForm";
+import { RegisterForm } from "@/components/RegisterForm";
 
 export const metadata: Metadata = {
-  title: "Sign in",
-  description: "Sign in to your account",
+  title: "Sign up",
+  description: "Create an account",
 };
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-4 py-16">
-      <LoginForm />
+      <RegisterForm />
     </div>
   );
 }

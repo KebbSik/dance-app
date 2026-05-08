@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { useId, useState } from "react";
 
 const navItems = [
-  { href: "/", label: "Strona główna" },
-  { href: "/about", label: "O nas" },
-  { href: "/classes", label: "Zajęcia" },
-  { href: "/contact", label: "Kontakt" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/classes", label: "Classes" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 function LogoPlaceholder({ className }: { className?: string }) {
@@ -38,7 +38,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 dark:border-zinc-800/80">
-      <div className="mx-auto flex max-w-6xl flex-col px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="relative flex h-14 items-center md:h-16">
           {/* Mobile: balanced bar + centered logo */}
           <div className="flex w-full items-center justify-between md:hidden">
@@ -48,7 +48,7 @@ export function Navbar() {
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
               onClick={() => setMenuOpen(false)}
             >
-              <span className="sr-only">Strona główna</span>
+              <span className="sr-only">Home</span>
               <LogoPlaceholder />
             </Link>
             <button
@@ -56,7 +56,7 @@ export function Navbar() {
               className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-zinc-700 hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:focus-visible:outline-zinc-50"
               aria-expanded={menuOpen}
               aria-controls={menuId}
-              aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
               onClick={() => setMenuOpen((open) => !open)}
             >
               <span className="sr-only">Menu</span>
@@ -88,10 +88,10 @@ export function Navbar() {
           {/* Desktop: logo left, nav + login right */}
           <div className="hidden w-full items-center justify-between md:flex">
             <Link href="/" className="shrink-0">
-              <span className="sr-only">Strona główna</span>
+              <span className="sr-only">Home</span>
               <LogoPlaceholder />
             </Link>
-            <nav aria-label="Główna nawigacja">
+            <nav aria-label="Main navigation">
               <ul className="flex items-center gap-1">
                 {navItems.map(({ href, label }) => (
                   <li key={href}>
@@ -105,7 +105,7 @@ export function Navbar() {
                     href="/login"
                     className="inline-flex items-center justify-center rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
                   >
-                    Zaloguj
+                    Log in
                   </Link>
                 </li>
               </ul>
@@ -113,16 +113,16 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile expanded panel */}
+        {/* Mobile menu: overlays page — does not shift layout */}
         <nav
           id={menuId}
-          aria-label="Menu mobilne"
+          aria-label="Mobile menu"
           inert={!menuOpen ? true : undefined}
-          className={`border-t border-zinc-200 transition-[max-height,opacity] duration-200 ease-out dark:border-zinc-800 md:hidden ${
+          className={`absolute left-0 right-0 top-full z-50 border-t border-zinc-200 bg-background/95 shadow-lg backdrop-blur supports-backdrop-filter:bg-background/90 dark:border-zinc-800 md:hidden md:pointer-events-none ${
             menuOpen
-              ? "max-h-[480px] opacity-100"
+              ? "pointer-events-auto max-h-[min(480px,80vh)] overflow-y-auto opacity-100"
               : "pointer-events-none max-h-0 overflow-hidden border-t-transparent opacity-0"
-          }`}
+          } transition-[max-height,opacity] duration-200 ease-out`}
         >
           <ul className="flex flex-col gap-1 py-3">
             {navItems.map(({ href, label }) => (
@@ -142,7 +142,7 @@ export function Navbar() {
                 className="flex w-full items-center justify-center rounded-full bg-zinc-950 px-4 py-3 text-sm font-medium text-zinc-50 dark:bg-zinc-50 dark:text-zinc-950"
                 onClick={() => setMenuOpen(false)}
               >
-                Zaloguj
+                Log in
               </Link>
             </li>
           </ul>
